@@ -8,11 +8,18 @@ import org.junit.jupiter.api.Test;
 
 public class TripServiceTest {
 
-  @Test
-  void should_throw_an_exception_when_user_is_not_logged_in() {
+  private static final User GUEST = null;
+  private static final User UNUSED_USER = null;
+  private User loggedInUser;
+
+  @Test void
+  should_throw_an_exception_when_user_is_not_logged_in() {
     TripService tripService = new TestableTripService();
+
+    loggedInUser = GUEST;
+
     assertThrows(UserNotLoggedInException.class, () -> {
-      tripService.getTripsByUser(null);
+      tripService.getTripsByUser(UNUSED_USER);
     });
   }
 
@@ -20,7 +27,7 @@ public class TripServiceTest {
 
     @Override
     protected User getLoggedInUser() {
-      return null;
+      return loggedInUser;
     }
   }
 }
