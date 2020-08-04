@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="trip-service-kata" target="1.8" />
+      <module name="trip-service-kata" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>
