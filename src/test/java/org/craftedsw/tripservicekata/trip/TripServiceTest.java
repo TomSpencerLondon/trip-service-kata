@@ -33,7 +33,7 @@ public class TripServiceTest {
     loggedInUser = GUEST;
 
     assertThrows(UserNotLoggedInException.class, () -> {
-      tripService.getTripsByUser(UNUSED_USER, null);
+      tripService.getTripsByUser(UNUSED_USER, GUEST);
     });
   }
 
@@ -44,7 +44,7 @@ public class TripServiceTest {
         .withTrips(TO_BRAZIL)
         .build();
 
-    List<Trip> friendTrips = tripService.getTripsByUser(friend, null);
+    List<Trip> friendTrips = tripService.getTripsByUser(friend, loggedInUser);
 
     assertEquals(0, friendTrips.size());
   }
@@ -56,7 +56,7 @@ public class TripServiceTest {
         .withTrips(TO_BRAZIL, TO_LONDON)
         .build();
 
-    List<Trip> friendTrips = tripService.getTripsByUser(friend, null);
+    List<Trip> friendTrips = tripService.getTripsByUser(friend, loggedInUser);
 
     assertEquals(2, friendTrips.size());
   }
