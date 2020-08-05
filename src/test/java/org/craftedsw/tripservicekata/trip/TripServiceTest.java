@@ -8,7 +8,6 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,19 +30,12 @@ public class TripServiceTest {
 
   @InjectMocks
   @Spy
-  private TripService realTripService = new TripService();
-
-  private TripService tripService;
-
-  @BeforeEach
-  void setUp() {
-    tripService = new TestableTripService();
-  }
+  private TripService tripService = new TripService();
 
   @Test void
   should_throw_an_exception_when_user_is_not_logged_in() {
     assertThrows(UserNotLoggedInException.class, () -> {
-      realTripService.getTripsByUser(UNUSED_USER, GUEST);
+      tripService.getTripsByUser(UNUSED_USER, GUEST);
     });
   }
 
@@ -54,7 +46,7 @@ public class TripServiceTest {
         .withTrips(TO_BRAZIL)
         .build();
 
-    List<Trip> friendTrips = realTripService.getTripsByUser(friend, REGISTERED_USER);
+    List<Trip> friendTrips = tripService.getTripsByUser(friend, REGISTERED_USER);
 
     assertEquals(0, friendTrips.size());
   }
@@ -68,16 +60,8 @@ public class TripServiceTest {
 
     when(tripDAO.tripsBy(friend)).thenReturn(friend.trips());
 
-    List<Trip> friendTrips = realTripService.getTripsByUser(friend, REGISTERED_USER);
+    List<Trip> friendTrips = tripService.getTripsByUser(friend, REGISTERED_USER);
 
     assertEquals(2, friendTrips.size());
-  }
-
-  private class TestableTripService extends TripService {
-
-    @Override
-    protected List<Trip> tripsBy(User user) {
-      return user.trips();
-    }
   }
 }
