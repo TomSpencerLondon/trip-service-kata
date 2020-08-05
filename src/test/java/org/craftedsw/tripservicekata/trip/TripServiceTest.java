@@ -35,7 +35,7 @@ public class TripServiceTest {
   @Test void
   should_throw_an_exception_when_user_is_not_logged_in() {
     assertThrows(UserNotLoggedInException.class, () -> {
-      tripService.getTripsByUser(UNUSED_USER, GUEST);
+      tripService.getFriendTrips(UNUSED_USER, GUEST);
     });
   }
 
@@ -46,7 +46,7 @@ public class TripServiceTest {
         .withTrips(TO_BRAZIL)
         .build();
 
-    List<Trip> friendTrips = tripService.getTripsByUser(friend, REGISTERED_USER);
+    List<Trip> friendTrips = tripService.getFriendTrips(friend, REGISTERED_USER);
 
     assertEquals(0, friendTrips.size());
   }
@@ -60,7 +60,7 @@ public class TripServiceTest {
 
     when(tripDAO.tripsBy(friend)).thenReturn(friend.trips());
 
-    List<Trip> friendTrips = tripService.getTripsByUser(friend, REGISTERED_USER);
+    List<Trip> friendTrips = tripService.getFriendTrips(friend, REGISTERED_USER);
 
     assertEquals(2, friendTrips.size());
   }
