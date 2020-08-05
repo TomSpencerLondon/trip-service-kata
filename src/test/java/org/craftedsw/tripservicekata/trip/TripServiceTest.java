@@ -1,7 +1,6 @@
 package org.craftedsw.tripservicekata.trip;
 
-import static org.craftedsw.tripservicekata.trip.UserBuilder.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.craftedsw.tripservicekata.trip.UserBuilder.aUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
