@@ -52,9 +52,9 @@ public class TripServiceTest {
   @Test void
   should_return_friend_trips_when_users_are_friends() {
     User friend = aUser()
-                    .friendsWith(ANOTHER_USER, loggedInUser)
-                    .withTrips(TO_BRAZIL, TO_LONDON)
-                    .build();
+        .friendsWith(ANOTHER_USER, loggedInUser)
+        .withTrips(TO_BRAZIL, TO_LONDON)
+        .build();
 
     List<Trip> friendTrips = tripService.getTripsByUser(friend);
 
